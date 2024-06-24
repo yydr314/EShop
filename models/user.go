@@ -1,3 +1,4 @@
+//	models包中 主要用來定義資料表中的資料結構
 //	檔案名稱要和資料表相同
 package models
 
@@ -11,7 +12,7 @@ type User struct {
 	AddTime  int
 }
 
-//表示配置操作資料庫的表名稱
+//	表示配置操作資料庫的表名稱
 func (User) TableName() string {
 	return "user"
 }
