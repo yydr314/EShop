@@ -12,7 +12,9 @@ import (
 func main() {
 	r := gin.Default()
 
-	router.InitSQLRouter(r)
+	r.LoadHTMLGlob("templates/**/**/*")
+	r.Static("/static","./static")
+	router.AdminRoutersInit(r)
 	router.InitNavRouter(r)
 
 	//	使用ini模塊

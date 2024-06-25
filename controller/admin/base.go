@@ -1,4 +1,4 @@
-package controller
+package admin
 
 import (
 	"net/http"
@@ -7,10 +7,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type NavController struct {
+type BaseController struct {
 }
 
-func (con NavController) Index(ctx *gin.Context) {
+func (con BaseController) Index(ctx *gin.Context) {
 	//	獲取nav數據
 	navList := []models.Nav{}
 	navInList := []models.Nav{}
