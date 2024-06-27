@@ -1,0 +1,31 @@
+{{ define "admin/public/page_aside.html" }}
+<ul class="aside">
+
+    <li>
+        <h4>管理員管理</h4>
+
+        <ul>
+            <li class="list-group-item"> <a href="/admin/manager" target="rightMain"> 管理員列表</a></li>
+            <li class="list-group-item"> <a href="/admin/manager/add" target="rightMain">增加管理員</a></li>
+            <li class="list-group-item"> <a href="/admin/manager/edit" target="rightMain">修改管理員</a></li>
+        </ul>
+    </li>
+    <li>
+        <h4>輪播圖管理</h4>
+        <ul>
+            <li class="list-group-item"> <a href="/admin/focus" target="rightMain"> 輪播圖列表</a></li>
+
+            <li class="list-group-item"> <a href="/admin/focus/add" target="rightMain">增加輪播圖</a></li>
+        </ul>
+    </li>
+    <li>
+        <h4>商品管理</h4>
+
+        <ul>
+            <li class="list-group-item"> <a href="/"> 商品列表</a></li>
+
+            <li class="list-group-item"> <a href="/add">增加商品</a></li>
+        </ul>
+    </li>
+</ul>
+{{ end }}
