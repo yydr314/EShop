@@ -11,7 +11,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a>欢迎您,admin</a>
                 </li>
-                <li><a href="#">安全退出</a>
+                <li><a href="/admin/loginOut">安全退出</a>
                 </li>
             </ul>
         </div>
@@ -25,7 +25,8 @@
             {{ template "admin/public/page_aside.html" .}}
         </div>
         <div class="col-sm-10">
-            <iframe width="100%" height="500px" name="rightMain" src="/admin/welcome" frameborder="0"></iframe>
+            <!-- 用name設定模板渲染的目標 -->
+            <iframe width="100%" id="rightMain" height="500px" name="rightMain" src="/admin/welcome" frameborder="0"></iframe>
         </div>
     </div>
 </div>

@@ -19,7 +19,7 @@ func init() {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
-
+	//	指派.ini中的資料
 	ip := config.Section("mysql").Key("ip").String()
 	port := config.Section("mysql").Key("port").String()
 	user := config.Section("mysql").Key("user").String()
