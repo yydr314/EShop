@@ -27,7 +27,7 @@
                                 <option value="0">---頂級模塊---</option>
                                 {{$moduleId := .access.ModuleId}}
                                 {{range $key,$value := .accessList}}
-                                <option {{if eq .$value.Id $moduleId}} selected {{end}} value="{{$value.Id}}">{{$value.ModuleName}}</option>
+                                <option {{if eq $value.Id $moduleId}} selected {{end}} value="{{$value.Id}}">{{$value.ModuleName}}</option>
                                 {{end}}
                             </select>
                         </li>

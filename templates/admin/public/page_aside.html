@@ -1,39 +1,38 @@
 {{ define "admin/public/page_aside.html" }}
 <ul class="aside">
-
+    {{$isSuper := .isSuper}}
+    {{range $key, $value := .accessList}}
+    {{if eq $isSuper 1}}
     <li>
-        <h4>管理員管理</h4>
+        <h4>{{$value.ModuleName}}</h4>
 
         <ul>
             <!-- 這裡的target將模板渲染到指定的目標iframe -->
-            <li class="list-group-item"> <a href="/admin/manager" target="rightMain"> 管理員列表</a></li>
-            <li class="list-group-item"> <a href="/admin/manager/add" target="rightMain">增加管理員</a></li>
-            <li class="list-group-item"> <a href="/admin/manager/edit" target="rightMain">修改管理員</a></li>
+            {{range $k,$v := &value.AccessItem}}
+            {{if eq $v.Type 2}}
+            <li class="list-group-item"> <a href="/admin/{{$v.Url}}" target="rightMain">{{v.ActionName}}</a></li>
+            {{end}}
+            {{end}}
         </ul>
     </li>
+    {{else}}
+    {{if eq $value.Checked true}}
     <li>
-        <h4>輪播圖管理</h4>
-        <ul>
-            <li class="list-group-item"> <a href="/admin/focus" target="rightMain"> 輪播圖列表</a></li>
+        <h4>{{$value.ModuleName}}</h4>
 
-            <li class="list-group-item"> <a href="/admin/focus/add" target="rightMain">增加輪播圖</a></li>
+        <ul>
+            <!-- 這裡的target將模板渲染到指定的目標iframe -->
+            {{range $k,$v := &value.AccessItem}}
+            {{if eq $v.Checked true}}
+            {{if eq $v.Type 2}}
+            <li class="list-group-item"> <a href="/admin/{{$v.Url}}" target="rightMain">{{v.ActionName}}</a></li>
+            {{end}}
+            {{end}}
+            {{end}}
         </ul>
     </li>
-    <li>
-        <h4>角色管理</h4>
-        <ul>
-            <li class="list-group-item"> <a href="/admin/role" target="rightMain">角色列表</a></li>
-
-            <li class="list-group-item"> <a href="/admin/role/add" target="rightMain">增加角色</a></li>
-        </ul>
-    </li>
-    <li>
-        <h4>權限管理</h4>
-        <ul>
-            <li class="list-group-item"> <a href="/admin/access" target="rightMain">權限列表</a></li>
-
-            <li class="list-group-item"> <a href="/admin/access/add" target="rightMain">增加權限</a></li>
-        </ul>
-    </li>
+    {{end}}
+    {{end}}
+    {{end}}
 </ul>
 {{ end }}

@@ -109,3 +109,70 @@ func (con RoleController) Delete(ctx *gin.Context) {
 		con.Success(ctx, "刪除數據成功", "/admin/role")
 	}
 }
+
+func (con RoleController) Auth(ctx *gin.Context) {
+	roleId, err := strconv.Atoi(ctx.Query("id"))
+	if err != nil {
+		con.Error(ctx, "傳入數據錯誤", "/admin/role")
+		return
+	}
+
+	//	獲取權限列表
+	accessList := []models.Access{}
+	models.DB.Where("module_id=?", 0).Preload("AccessItem").Find(&accessList)
+
+	//	找到當前角色的所有權限
+	roleAccess := []models.RoleAccess{}
+	models.DB.Where("role_id=?", roleId).Find(&roleAccess)
+
+	//	將該角色的所有權限寫入map中
+	roleAccessMap := make(map[int]struct{})
+	for _, v := range roleAccess {
+		roleAccessMap[v.AccessId] = struct{}{}
+	}
+
+	//	判斷所有權限有沒有在這個角色的權限map裡面
+	for i := 0; i < len(accessList); i++ {
+		if _, ok := roleAccessMap[accessList[i].Id]; ok {
+			accessList[i].Checked = true
+		}
+		for j := 0; j < len(accessList[i].AccessItem); j++ {
+			if _, ok := roleAccessMap[accessList[i].AccessItem[j].Id]; ok {
+				accessList[i].AccessItem[j].Checked = true
+			}
+		}
+	}
+
+	ctx.HTML(http.StatusOK, "admin/role/auth.html", gin.H{
+		"roleId":     roleId,
+		"accessList": accessList,
+	})
+}
+
+func (con RoleController) DoAuth(ctx *gin.Context) {
+	roleId, err := strconv.Atoi(ctx.PostForm("role_id"))
+	if err != nil {
+		con.Error(ctx, "傳入數據錯誤", "/admin/role")
+		return
+	}
+	//	獲取權限id切片
+	accessIds := ctx.PostFormArray("access_node[]")
+
+	//刪除當前角色對應的權限
+	roleAccess := models.RoleAccess{}
+	models.DB.Where("role_id=?", roleId).Delete(&roleAccess)
+
+	//	增加當前角色對應的權限
+
+	for _, v := range accessIds {
+		roleAccess.RoleId = roleId
+		accessId, _ := strconv.Atoi(v)
+		roleAccess.AccessId = accessId
+		err := models.DB.Create(&roleAccess).Error
+		if err != nil {
+			con.Error(ctx, "添加權限失敗", "/admin/role")
+			return
+		}
+	}
+	con.Success(ctx, "添加權限成功", "/admin/role")
+}
