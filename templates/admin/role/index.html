@@ -15,7 +15,13 @@
             <tr>
                 <td>{{$value.Title}}</td>
                 <td>{{$value.Description}}</td>
-                <td>{{$value.Status}}</td>
+                <td align="center">
+                    {{if eq $value.Status 1}}
+                    <img class="chStatus" data-id="{{$value.Id}}" data-table="role" data-field="status" src="/static/admin/images/yes.gif" alt="">
+                    {{else}}
+                    <img class="chStatus" data-id="{{$value.Id}}" data-table="role" data-field="status" src="/static/admin/images/no.gif" alt="">
+                    {{end}}
+                </td>
 
                 <td class="text-center">
                     <a href="/admin/role/auth?id={{$value.Id}}">授權</a>

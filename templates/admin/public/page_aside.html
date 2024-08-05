@@ -8,9 +8,9 @@
 
         <ul>
             <!-- 這裡的target將模板渲染到指定的目標iframe -->
-            {{range $k,$v := &value.AccessItem}}
+            {{range $k,$v := $value.AccessItem}}
             {{if eq $v.Type 2}}
-            <li class="list-group-item"> <a href="/admin/{{$v.Url}}" target="rightMain">{{v.ActionName}}</a></li>
+            <li class="list-group-item"> <a href="/admin/{{$v.Url}}" target="rightMain">{{$v.ActionName}}</a></li>
             {{end}}
             {{end}}
         </ul>
@@ -22,10 +22,10 @@
 
         <ul>
             <!-- 這裡的target將模板渲染到指定的目標iframe -->
-            {{range $k,$v := &value.AccessItem}}
+            {{range $k,$v := $value.AccessItem}}
             {{if eq $v.Checked true}}
             {{if eq $v.Type 2}}
-            <li class="list-group-item"> <a href="/admin/{{$v.Url}}" target="rightMain">{{v.ActionName}}</a></li>
+            <li class="list-group-item"> <a href="/admin/{{$v.Url}}" target="rightMain">{{$v.ActionName}}</a></li>
             {{end}}
             {{end}}
             {{end}}
