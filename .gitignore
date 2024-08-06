@@ -21,3 +21,6 @@
 go.work
 
 conf
+
+static/admin/images
+static/upload
