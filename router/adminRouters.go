@@ -13,6 +13,7 @@ func AdminRoutersInit(r *gin.Engine) {
 		adminRouters.GET("/", admin.MainController{}.Index)
 		adminRouters.GET("/welcome", admin.MainController{}.Welcome)
 		adminRouters.GET("/changeStatus",admin.MainController{}.ChangeStatus)
+		adminRouters.GET("/changeNum",admin.MainController{}.ChangeNum)
 
 		adminRouters.GET("/login", admin.LoginController{}.Index)
 		adminRouters.GET("/captcha", admin.LoginController{}.Captcha)
@@ -35,9 +36,9 @@ func AdminRoutersInit(r *gin.Engine) {
 
 		adminRouters.GET("/role", admin.RoleController{}.Index)
 		adminRouters.GET("/role/add", admin.RoleController{}.Add)
-		adminRouters.POST("/role/doadd", admin.RoleController{}.DoAdd)
+		adminRouters.POST("/role/doAdd", admin.RoleController{}.DoAdd)
 		adminRouters.GET("/role/edit", admin.RoleController{}.Edit)
-		adminRouters.POST("/role/doedit", admin.RoleController{}.DoEdit)
+		adminRouters.POST("/role/doEdit", admin.RoleController{}.DoEdit)
 		adminRouters.GET("/role/delete", admin.RoleController{}.Delete)
 		adminRouters.POST("/role/doAuth", admin.RoleController{}.DoAuth)
 		adminRouters.GET("/role/auth", admin.RoleController{}.Auth)
@@ -48,6 +49,13 @@ func AdminRoutersInit(r *gin.Engine) {
 		adminRouters.GET("/access/edit", admin.AccessController{}.Edit)
 		adminRouters.POST("/access/doEdit",admin.AccessController{}.DoEdit)
 		adminRouters.GET("/access/delete", admin.AccessController{}.Delete)
+
+		adminRouters.GET("/goodsCate", admin.GoodsCateController{}.Index)
+		adminRouters.GET("/goodsCate/add", admin.GoodsCateController{}.Add)
+		adminRouters.POST("/goodsCate/doAdd",admin.GoodsCateController{}.DoAdd)
+		adminRouters.GET("/goodsCate/edit", admin.GoodsCateController{}.Edit)
+		adminRouters.POST("/goodsCate/doEdit",admin.GoodsCateController{}.DoEdit)
+		adminRouters.GET("/goodsCate/delete", admin.GoodsCateController{}.Delete)
 	}
 
 }

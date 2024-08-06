@@ -104,3 +104,31 @@ func (con MainController) ChangeStatus(ctx *gin.Context) {
 		"message": "修改數據成功",
 	})
 }
+
+func (con MainController) ChangeNum(ctx *gin.Context) {
+	id, err := strconv.Atoi(ctx.Query("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"success": false,
+			"message": "傳入參數錯誤",
+		})
+		return
+	}
+
+	table := ctx.Query("table")
+	field := ctx.Query("field")
+	number := ctx.Query("num")
+
+	err = models.DB.Exec("update " + table + " set " + field + "=" + number + " where id=" + strconv.Itoa(id)).Error
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"success": false,
+			"message": "修改數據失敗",
+		})
+	} else {
+		ctx.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "修改數據成功",
+		})
+	}
+}
