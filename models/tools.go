@@ -26,7 +26,6 @@ func UnixToTime(timeUnix int) string {
 
 // 上傳文件
 func UploadFile(ctx *gin.Context, picName string) (string, error) {
-	//	上傳文件
 	file, err := ctx.FormFile(picName)
 	if err != nil {
 		return "", err

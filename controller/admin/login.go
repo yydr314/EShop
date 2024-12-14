@@ -51,14 +51,13 @@ func (con LoginController) DoLogin(ctx *gin.Context) {
 }
 
 func (con LoginController) Captcha(ctx *gin.Context) {
-	id, b64s, ans, err := models.MakeCaptcha()
+	id, b64s, _, err := models.MakeCaptcha()
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"captchaId":     id,
 		"captchaImage":  b64s,
-		"captchaAnswer": ans,
 	})
 }
 
